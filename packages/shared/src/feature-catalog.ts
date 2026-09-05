@@ -53,7 +53,7 @@ export const INSTANCE_FEATURE_CATALOG: Record<InstanceFeatureKey, FeatureCatalog
   enableNativeRunner: {
     title: "Paperclip Runner",
     description:
-      "Allow new Codex agents to use the experimental Rust Paperclip Runner transport.",
+      "Allow explicitly configured local Codex, OpenCode, and qualified ACPX agents to use the experimental Rust Paperclip Runner, including authenticated sandbox ingress when required. Onboarding remains on legacy adapters.",
     tier: "managed",
     cloudDefault: false,
     selfHostedDefault: false,
@@ -81,13 +81,21 @@ export const INSTANCE_FEATURE_CATALOG: Record<InstanceFeatureKey, FeatureCatalog
     cloudDefault: true,
     selfHostedDefault: true,
   },
-  enableApps: {
-    title: "Apps",
+  enableStreamlinedUi: {
+    title: "Streamlined UI",
     description:
-      "Show the Apps navigation and allow access to app connections, gateways, and advanced app tooling.",
+      "Use the streamlined application shell, shared task collections, focused task detail layout, contextual navigation, and simplified main sidebar.",
+    tier: "preference",
+    cloudDefault: true,
+    selfHostedDefault: true,
+  },
+  enableApps: {
+    title: "Apps (compatibility)",
+    description:
+      "Deprecated compatibility key. Apps is always enabled; stored and managed values are ignored.",
     tier: "managed",
-    cloudDefault: false,
-    selfHostedDefault: false,
+    cloudDefault: true,
+    selfHostedDefault: true,
   },
   enablePipelines: {
     title: "Pipelines",
@@ -120,16 +128,8 @@ export const INSTANCE_FEATURE_CATALOG: Record<InstanceFeatureKey, FeatureCatalog
     cloudDefault: false,
     selfHostedDefault: false,
   },
-  enableTaskWatchdogs: {
-    title: "Task Watchdogs",
-    description:
-      "Show task detail controls for configuring watchdog agents that verify stopped task subtrees and restore live paths when work should continue.",
-    tier: "managed",
-    cloudDefault: false,
-    selfHostedDefault: false,
-  },
   enableIssuePlanDecompositions: {
-    title: "Task Plan Decomposition Panel",
+    title: "Task Plan Decomposition",
     description: "Show accepted-plan decomposition history on task detail pages.",
     tier: "managed",
     cloudDefault: false,
@@ -237,14 +237,6 @@ export const INSTANCE_FEATURE_CATALOG: Record<InstanceFeatureKey, FeatureCatalog
     cloudDefault: false,
     selfHostedDefault: false,
   },
-  enableIssueGraphLivenessAutoRecovery: {
-    title: "Auto-Create Recovery Tasks",
-    description:
-      "Let the heartbeat scheduler create recovery tasks for task dependency chains found inside the configured lookback window.",
-    tier: "managed",
-    cloudDefault: false,
-    selfHostedDefault: false,
-  },
   enableWorkspaceBranchReconcileForward: {
     title: "Workspace Branch Reconcile Forward",
     description:
@@ -278,9 +270,9 @@ export const INSTANCE_FEATURE_CATALOG: Record<InstanceFeatureKey, FeatureCatalog
     selfHostedDefault: false,
   },
   enableRunnerPreviewIngress: {
-    title: "Runner Preview Ingress",
+    title: "Runner Preview Ingress (Deprecated)",
     description:
-      "Let paperclip_runner connect through an authenticated sandbox-provider WebSocket ingress. Legacy adapters never use this path.",
+      "Compatibility-only key retained for older managed configs. Runner ingress follows the Paperclip Runner setting.",
     tier: "managed",
     cloudDefault: false,
     selfHostedDefault: false,
